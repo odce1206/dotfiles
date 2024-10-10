@@ -78,10 +78,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-	git 
 	themes 
 	zsh-autosuggestions
 	autoenv
+	colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -116,13 +116,26 @@ source "$HOME/.rye/env"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH="/home/soods/todo.txt_cli:$PATH"
 export PATH="$PATH:/opt/nvim-linux64/bin"
-alias td="todo.sh"
 export VISUAL="nvim"
 export EDITOR="nvim"
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+
+# NerdFonts variables
+export PC=""
+export MJ="ﲤ"
+export DEV=""
+export TST=""
+export CFG=""
+export DS="󰣙"
+export HL="󰮣"
+
 alias dots=~/repos/dotfiles/dotfiles.sh
+alias td="todo.sh"
+alias t="tmux"
+alias ta="tmux a -t"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export NVM_DIR="$HOME/.nvm"
@@ -130,4 +143,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+eval $(thefuck --alias)
 source <(fzf --zsh)

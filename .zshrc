@@ -121,15 +121,20 @@ export EDITOR="nvim"
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+export NO_PROXY=0.0.0.0
+export NO_PROXY="localhost"
+export NO_PROXY=127.0.0.1
 
 # NerdFonts variables
 export PC=""
 export MJ="ﲤ"
-export DEV=""
+export DEV=""
 export TST=""
 export CFG=""
 export DS="󰣙"
 export HL="󰮣"
+export NV=""
+export TRM=""
 
 alias dots=~/repos/dotfiles/dotfiles.sh
 alias td="todo.sh"

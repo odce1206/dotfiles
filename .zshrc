@@ -1,6 +1,13 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 # if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 #   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 # fi
@@ -80,12 +87,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
 	themes 
 	zsh-autosuggestions
-	autoenv
+	# autoenv
 	colored-man-pages
 )
 
 source $ZSH/oh-my-zsh.sh
-source "$HOME/.rye/env"
+# source "$HOME/.rye/env"
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -118,12 +125,13 @@ export PATH="/home/soods/todo.txt_cli:$PATH"
 export PATH="$PATH:/opt/nvim-linux64/bin"
 export VISUAL="nvim"
 export EDITOR="nvim"
-export GOROOT="/usr/local/go"
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
+# export GOROOT="/usr/local/go"
+# export GOPATH="$HOME/go"
+# export PATH="$GOPATH/bin:$GOROOT/bin:$PATH"
 export NO_PROXY=0.0.0.0
 export NO_PROXY="localhost"
 export NO_PROXY=127.0.0.1
+export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 # NerdFonts variables
 export PC=""

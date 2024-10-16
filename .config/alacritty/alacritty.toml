@@ -1,5 +1,6 @@
 import = [
-	"~/.config/alacritty/themes/themes/kanagawa_dragon.toml"
+	"~/.config/alacritty/themes/themes/carbonfox.toml"
+	# "~/.config/alacritty/themes/themes/kanagawa_dragon.toml"
 ]
 
 [shell]
@@ -10,8 +11,14 @@ bindings = [
 {key = "Return", mods = "Control|Shift", action = "SpawnNewInstance"}
 ]
 
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+bright_foreground = "#6a9fb5"
+
 [font]
-size = 11.0
+size = 10.5
 
 [font.bold]
 family = "MesloLGM Nerd Font"

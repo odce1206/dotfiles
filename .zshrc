@@ -1,9 +1,6 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -17,12 +14,13 @@ fi
 
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export TERM=xterm-256color
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set up Node Version Manager
 
@@ -94,6 +92,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/.zshenv
 # source "$HOME/.rye/env"
 # User configuration
 
@@ -133,33 +132,57 @@ export EDITOR="nvim"
 export NO_PROXY=0.0.0.0
 export NO_PROXY="localhost"
 export NO_PROXY=127.0.0.1
-export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+# export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 # NerdFonts variables
-export PC=""
-export MJ="ﲤ"
-export DEV=""
-export TST=""
-export CFG=""
-export DS="󰣙"
-export HL="󰮣"
-export NV=""
-export TRM=""
-export ARCH='󰣇'
-export WIN=''
+export PC=" "
+export DEV=" "
+export TST=" "
+export CFG=" "
+export DS="󰣙 "
+export HL="󰮣 "
+export NV=" "
+export TRM=" "
+export ARCH='󰣇 '
+export WIN=' '
 
 alias dots=~/repos/dotfiles/dotfiles.sh
 alias td="todo.sh"
 alias t="tmux"
 alias ta="tmux a -t"
+alias mipa="python main.py"
+alias regit="git fetch && git pull"
+alias pyact="source .venv/bin/activate"
+# alias z="zoxide"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 eval $(thefuck --alias)
 source <(fzf --zsh)
+
+. "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
+
+# pnpm
+export PNPM_HOME="/home/sudojar/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
